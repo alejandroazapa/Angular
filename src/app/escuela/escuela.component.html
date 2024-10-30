@@ -1,0 +1,45 @@
+<!-- src/app/home/escuela.component.html -->
+<div class="container">
+    <h2>Gestión de Escuelas</h2>
+    <button (click)="mostrarDialogoCrear()" class="add-btn">+</button>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>ID ESCUELA</th>
+          <th>ESCUELA</th>
+          <th>ID FACULTAD</th>
+          <th>FACULTAD</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let escuela of escuelas">
+          <td>{{ escuela.id }}</td>
+          <td>{{ escuela.nombre }}</td>
+          <td>{{ escuela.idFacultad }}</td>
+          <td>{{ escuela.facultad }}</td>
+          <td>
+            <button (click)="mostrarDialogoEditar(escuela)" class="edit-btn">✏️</button>
+            <button (click)="eliminarEscuela(escuela.id)" class="delete-btn">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Dialogo para crear o editar -->
+    <div *ngIf="dialogVisible" class="dialog-overlay">
+      <div class="dialog">
+        <h3>{{ isEditMode ? 'Editar Escuela' : 'Crear Escuela' }}</h3>
+        <label>Nombre:</label>
+        <input [(ngModel)]="escuelaActual.nombre" type="text" />
+  
+        <label>ID Facultad:</label>
+        <input [(ngModel)]="escuelaActual.idFacultad" type="text" />
+  
+        <button (click)="guardarEscuela()">{{ isEditMode ? 'Guardar Cambios' : 'Agregar' }}</button>
+        <button (click)="cerrarDialogo()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  
